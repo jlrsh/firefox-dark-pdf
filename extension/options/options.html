@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dark PDF Viewer settings</title>
+    <link rel="stylesheet" href="../shared/ui.css" />
+    <link rel="stylesheet" href="options.css" />
+    <script type="module" src="options.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Dark PDF Viewer</h1>
+
+      <section>
+        <h2>Opening PDFs</h2>
+        <label class="row"><input type="checkbox" data-key="interceptEnabled" /> Open PDFs in Dark PDF Viewer instead of Firefox’s viewer</label>
+        <label class="row"><input type="checkbox" data-key="interceptAttachments" /> Also open PDFs that the site sends as downloads</label>
+        <p class="hint">PDFs served with <code>Content-Disposition: attachment</code> download normally unless this is on.</p>
+        <label class="stack" for="bypassHosts">Never open PDFs from these sites (one per line, subdomains included)</label>
+        <textarea id="bypassHosts" rows="4" spellcheck="false" placeholder="example.com"></textarea>
+      </section>
+
+      <section>
+        <h2>Dark mode</h2>
+        <fieldset class="choices">
+          <legend>Page colors</legend>
+          <label><input type="radio" name="mode" value="off" /> <span><b>Original colors</b> Pages as authored.</span></label>
+          <label><input type="radio" name="mode" value="basic" /> <span><b>Basic dark</b> PDF.js’s built-in color replacement. Fast, but images turn into gray tones.</span></label>
+          <label><input type="radio" name="mode" value="selective" /> <span><b>Selective dark</b> Recolors text, backgrounds and line art; photos and figures keep their colors.</span></label>
+        </fieldset>
+
+        <div class="colors">
+          <label>Background <input type="color" data-key="background" /></label>
+          <label>Text <input type="color" data-key="foreground" /></label>
+          <div class="preview" id="preview" aria-hidden="true"><span>Aa</span></div>
+        </div>
+
+        <fieldset class="choices">
+          <legend>Colored vector graphics (selective mode)</legend>
+          <label><input type="radio" name="vectorPolicy" value="preserve" /> <span><b>Keep their colors</b> Plot lines, colored boxes and diagrams look as authored. Gray and black line art is still recolored.</span></label>
+          <label><input type="radio" name="vectorPolicy" value="adapt" /> <span><b>Adapt them</b> Reverse their lightness, keeping the hue, so everything sits comfortably on the dark page.</span></label>
+        </fieldset>
+
+        <label class="row"><input type="checkbox" data-key="keepColorsOverImages" /> Keep original colors for text and shapes drawn on top of images</label>
+        <label class="row"><input type="checkbox" data-key="swapBlendModes" /> Adjust multiply/screen blending for the dark page (highlights stay visible)</label>
+        <label class="row"><input type="checkbox" data-key="darkInterface" /> Use a dark toolbar while dark mode is on</label>
+      </section>
+
+      <div class="footer">
+        <button type="button" id="reset">Restore defaults</button>
+        <span id="status" role="status"></span>
+      </div>
+    </main>
+  </body>
+</html>

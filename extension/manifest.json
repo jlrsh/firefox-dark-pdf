@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "name": "Dark PDF Viewer",
+  "version": "0.1.0",
+  "description": "Opens PDFs in a bundled PDF.js viewer with a selective dark mode that recolors text and backgrounds but keeps images and figures in their original colors.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "dark-pdf-viewer@local",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
+  "permissions": ["webRequest", "webRequestBlocking", "storage", "tabs", "<all_urls>"],
+  "background": {
+    "page": "background/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Dark PDF Viewer",
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/toolbar-dark.svg",
+    "theme_icons": [
+      { "light": "icons/toolbar-light.svg", "dark": "icons/toolbar-dark.svg", "size": 16 },
+      { "light": "icons/toolbar-light.svg", "dark": "icons/toolbar-dark.svg", "size": 32 }
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": ["pdfjs/web/viewer.html"],
+  "content_security_policy": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+}

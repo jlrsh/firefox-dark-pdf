@@ -1,0 +1,5 @@
+node_modules/
+dist/
+extension/pdfjs/
+test/fixtures/
+test/e2e/output/

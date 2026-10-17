@@ -1,0 +1,27 @@
+/* Additions to PDF.js's viewer.css for the Dark PDF Viewer controls. */
+
+#darkPdfModeContainer {
+  min-width: 128px;
+}
+
+#darkPdfOpenNative::before {
+  -webkit-mask-image: url(icons/open-native.svg);
+          mask-image: url(icons/open-native.svg);
+}
+
+#darkPdfSettings::before {
+  -webkit-mask-image: url(icons/moon.svg);
+          mask-image: url(icons/moon.svg);
+}
+
+/* Page placeholders and thumbnails shouldn't flash white while rendering. */
+.darkPdfActive .thumbnailImage,
+.darkPdfActive .thumbnail .thumbnailImageContainer {
+  background-color: var(--dark-pdf-bg);
+}
+
+@media (max-width: 640px) {
+  #darkPdfModeContainer {
+    min-width: 0;
+  }
+}

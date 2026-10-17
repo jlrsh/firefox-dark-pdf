@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../shared/ui.css" />
+    <link rel="stylesheet" href="popup.css" />
+    <script type="module" src="popup.js"></script>
+  </head>
+  <body>
+    <h1>Dark PDF Viewer</h1>
+
+    <fieldset class="modes" id="modes">
+      <legend>Page colors</legend>
+      <label><input type="radio" name="mode" value="off" /> Original</label>
+      <label><input type="radio" name="mode" value="basic" /> Basic dark</label>
+      <label><input type="radio" name="mode" value="selective" /> Selective</label>
+    </fieldset>
+
+    <label class="row"><input type="checkbox" id="interceptEnabled" /> Open PDFs in this viewer</label>
+    <label class="row" id="siteRow" hidden><input type="checkbox" id="siteBypass" /> <span>Never on <b id="siteName"></b></span></label>
+
+    <div class="actions">
+      <button type="button" id="openNative" hidden>Open in Firefox’s viewer</button>
+      <button type="button" id="openOptions" class="link">More settings…</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+/* Shared look for the popup and options page. */
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#fbfbfe, #2b2a33);
+  --fg: light-dark(#15141a, #fbfbfe);
+  --muted: light-dark(#5b5b66, #bfbfc9);
+  --border: light-dark(#cfcfd8, #52525e);
+  --accent: light-dark(#0061e0, #00ddff);
+  --accent-fg: light-dark(#ffffff, #15141a);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: message-box;
+  font-size: 13px;
+}
+
+button {
+  font: inherit;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+button.link {
+  padding: 0;
+  border: none;
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--accent);
+}

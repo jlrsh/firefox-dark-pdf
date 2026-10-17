@@ -1,0 +1,20 @@
+{
+  "name": "firefox-dark-pdf",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Firefox extension: PDF.js viewer with selective, image-preserving dark mode",
+  "type": "module",
+  "scripts": {
+    "setup": "node scripts/fetch-pdfjs.mjs",
+    "fixtures": "node scripts/make-fixtures.mjs",
+    "test": "node --test test/*.test.mjs",
+    "lint": "web-ext lint --source-dir extension",
+    "start": "web-ext run --source-dir extension --url https://arxiv.org/pdf/1804.03252",
+    "build": "web-ext build --source-dir extension --artifacts-dir dist --overwrite-dest",
+    "e2e": "node test/e2e/run.mjs"
+  },
+  "devDependencies": {
+    "selenium-webdriver": "^4.51.0",
+    "web-ext": "^10.8.0"
+  }
+}
