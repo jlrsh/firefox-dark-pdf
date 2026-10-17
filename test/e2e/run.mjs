@@ -47,6 +47,11 @@ function startServer() {
       res.end();
       return;
     }
+    if (route === "linkpage") {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end('<!doctype html><title>link page</title><input id="field"><a id="pdf" href="/files/mixed.pdf">paper</a>');
+      return;
+    }
     if (route === "page") {
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end("<!doctype html><title>plain page</title><p>Not a PDF</p>");
@@ -300,7 +305,7 @@ try {
 
   console.log("Interception");
   let viewerBase;
-  await check("direct .pdf URL opens in the extension viewer, same tab", async () => {
+  await check("PDF typed into an empty tab opens in that tab", async () => {
     const handles = await driver.getAllWindowHandles();
     requestLog.length = 0;
     const url = await openViewer(driver, `${base}/files/mixed.pdf`);
@@ -309,6 +314,32 @@ try {
     assert((await driver.getAllWindowHandles()).length === handles.length, "a new tab was opened");
     const gets = requestLog.filter(r => r.path === "/files/mixed.pdf");
     return `${url.slice(0, 40)}…; server saw ${gets.length} requests (${gets.filter(r => r.range).length} ranged)`;
+  });
+  await check("PDF link opens the viewer in a new tab; the page stays in the original tab", async () => {
+    await driver.get(`${base}/linkpage/`);
+    await driver.findElement(By.id("field")).sendKeys("unsaved input");
+    const before = await driver.getAllWindowHandles();
+    await driver.findElement(By.id("pdf")).click();
+    let added;
+    const end = Date.now() + 10000;
+    while (!added && Date.now() < end) {
+      added = (await driver.getAllWindowHandles()).find(h => !before.includes(h));
+      await new Promise(r => setTimeout(r, 100));
+    }
+    assert(added, "no new tab opened");
+    await new Promise(r => setTimeout(r, 1000));
+    const field = await driver.findElement(By.id("field")).getAttribute("value");
+    const state = [await driver.getCurrentUrl(), await driver.getTitle(), await driver.executeScript("return history.length")];
+    assert(state[0] === `${base}/linkpage/` && state[1] === "link page", `original tab changed: ${state}`);
+    assert(field === "unsaved input", "the original page was reloaded");
+    await driver.switchTo().window(added);
+    await waitForUrl(driver, u => u.startsWith(viewerBase));
+    await waitFor(driver, PAGE_RENDERED);
+    // The rest of the suite drives a single tab.
+    await driver.executeScript("return browser.storage.local.set({ openInNewTab: false })");
+    await driver.close();
+    await driver.switchTo().window(mainHandle);
+    return `original tab history.length ${state[2]}`;
   });
   await check("URL without .pdf suffix is detected from Content-Type", async () => {
     const url = await openViewer(driver, `${base}/noext/mixed`);

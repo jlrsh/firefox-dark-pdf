@@ -15,6 +15,8 @@
       <section>
         <h2>Opening PDFs</h2>
         <label class="row"><input type="checkbox" data-key="interceptEnabled" /> Open PDFs in Dark PDF Viewer instead of Firefox’s viewer</label>
+        <label class="row"><input type="checkbox" data-key="openInNewTab" /> Open PDFs in a new tab, keeping the page you came from in the original tab</label>
+        <p class="hint">A PDF that would load into an empty tab (new-tab page, or a link that already opened a new tab) opens right there instead.</p>
         <label class="row"><input type="checkbox" data-key="interceptAttachments" /> Also open PDFs that the site sends as downloads</label>
         <p class="hint">PDFs served with <code>Content-Disposition: attachment</code> download normally unless this is on.</p>
         <label class="stack" for="bypassHosts">Never open PDFs from these sites (one per line, subdomains included)</label>

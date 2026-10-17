@@ -94,6 +94,15 @@ export function interceptDecision(details, settings) {
   return { intercept: true, reason: "pdf" };
 }
 
+/**
+ * Whether a tab currently showing `tabUrl` has a page worth keeping when a
+ * PDF loads in it. Blank and new-tab pages don't: the PDF can replace them
+ * instead of leaving an empty tab behind.
+ */
+export function tabHasPageToKeep(tabUrl) {
+  return /^(https?|file|moz-extension):/i.test(tabUrl ?? "");
+}
+
 export function buildViewerUrl(viewerBase, pdfUrl) {
   const hashAt = pdfUrl.indexOf("#");
   const file = hashAt === -1 ? pdfUrl : pdfUrl.slice(0, hashAt);

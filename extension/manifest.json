@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
   "name": "Dark PDF Viewer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Opens PDFs in a bundled PDF.js viewer with a selective dark mode that recolors text and backgrounds but keeps images and figures in their original colors.",
   "browser_specific_settings": {
     "gecko": {
       "id": "dark-pdf-viewer@local",
-      "strict_min_version": "128.0",
+      "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": ["none"]
       }
@@ -16,7 +16,7 @@
     "48": "icons/icon.svg",
     "96": "icons/icon.svg"
   },
-  "permissions": ["webRequest", "webRequestBlocking", "storage", "tabs", "<all_urls>"],
+  "permissions": ["webRequest", "webRequestBlocking", "storage", "tabs", "cookies", "<all_urls>"],
   "background": {
     "page": "background/background.html",
     "persistent": true

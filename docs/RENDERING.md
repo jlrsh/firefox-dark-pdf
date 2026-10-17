@@ -76,6 +76,7 @@ Because the lightness mapping is monotonic, the contrast between any two remappe
 
 - Only top-level navigations are intercepted. PDFs embedded in `<iframe>`/`<embed>` and `file://` PDFs stay with Firefox: extensions can't read `file://` URLs, so open local files via the viewer's Open button. POST responses are also left alone, since the viewer would have to re-request them with GET.
 - PDFs served as `attachment` download normally unless the option is enabled.
+- In new-tab mode, a PDF link clicked inside the viewer also opens in a new tab, because the viewer counts as a page worth keeping.
 - Each intercepted PDF costs one extra, aborted request (headers only) before the viewer fetches it.
 
 **Technical**

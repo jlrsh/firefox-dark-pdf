@@ -63,3 +63,12 @@ test("viewer URL round-trips the PDF URL and keeps the fragment outside", () => 
   assert.equal(pdfUrlFromViewerUrl(url, base), "https://x.test/a b.pdf?x=1&y=2");
   assert.equal(pdfUrlFromViewerUrl("https://x.test/", base), null);
 });
+
+test("new-tab mode keeps real pages but reuses blank tabs", async () => {
+  const { tabHasPageToKeep } = await import("../extension/background/detect.js");
+  assert.ok(tabHasPageToKeep("https://arxiv.org/abs/1804.03252"));
+  assert.ok(tabHasPageToKeep("moz-extension://abc/pdfjs/web/viewer.html?file=x"));
+  for (const url of ["about:blank", "about:newtab", "about:home", "about:privatebrowsing", "", undefined]) {
+    assert.ok(!tabHasPageToKeep(url), String(url));
+  }
+});

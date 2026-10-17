@@ -7,6 +7,7 @@ export const DEFAULT_SETTINGS = Object.freeze({
   // Interception
   interceptEnabled: true,
   interceptAttachments: false,
+  openInNewTab: true,
   bypassHosts: [],
   // Rendering
   mode: "selective",

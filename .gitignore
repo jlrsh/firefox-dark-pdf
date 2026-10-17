@@ -3,3 +3,4 @@ dist/
 extension/pdfjs/
 test/fixtures/
 test/e2e/output/
+.DS_Store
